@@ -9,13 +9,8 @@ $usuario_err = $pass_err = $act_err = "";
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if (!empty($_POST["usuario"])) {
-    }
-    // Check if usuario is empty
-    if (empty(trim($_POST["usuario"]))) {
-        $usuario_err = 'El usuario es obligatorio.';
-    } else {
-        $usuario = trim($_POST["usuario"]);
+    if (isset($_GET["usuario"])) {
+        $usuario = $_GET["usuario"];
     }
 
     // Check if pass is empty
@@ -25,8 +20,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pass = trim($_POST['pass']);
     }
 
+    if (empty(trim($_POST['pass2']))) {
+        $pass_err = 'La contraseña es obligatoria';
+    } else {
+        $pass2 = trim($_POST['pass']);
+    }
+
+    if ($pass == $pass2) {
+        $nueva_pass = password_hash($pass2, PASSWORD_DEFAULT);
+        $actualizar_contraseña = mysqli_query($link, "UPDATE usuario SET pass = '$nueva_pass', estado = 1 WHERE correo = '$usuario'");
+    } else {
+        $pass_err = 'La contraseña no coincide';
+    }
+
+
+
     // Validate credentials
-    if (empty($usuario_err) && empty($pass_err)) {
+    if (empty($pass_err)) {
         // Prepare a select statement
         $query = "SELECT * FROM usuario WHERE correo = '$usuario'";
         $sql = "SELECT correo, pass FROM usuario WHERE correo = ?";
@@ -88,7 +98,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             } else if ($data['estado'] == 2) {
 
                                 header("location: reset_pass.php?usuario=$usuario");
-
                             } else if ($data['estado'] == 0) {
                                 $usuario_err = 'Usuario está inactivo';
                             }

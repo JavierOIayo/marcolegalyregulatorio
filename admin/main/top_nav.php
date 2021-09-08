@@ -42,7 +42,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right pb-0">
                                 <a class="dropdown-item" href="#"><i class="bx bx-user mr-50"></i> Mi perfil</a>
-                                <div class="dropdown-divider mb-0"></div><a class="dropdown-item" href="#"><i class="bx bx-power-off mr-50"></i> Salir</a>
+                                <div class="dropdown-divider mb-0"></div><a class="dropdown-item" href="../auth/logout.php"><i class="bx bx-power-off mr-50"></i> Salir</a>
                             </div>
                         </li>
                     </ul>
