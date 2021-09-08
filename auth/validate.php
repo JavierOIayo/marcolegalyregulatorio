@@ -56,7 +56,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 /* pass is correct, so start a new session and
                                 save the usuario to the session */
                                 session_start();
-                                $_SESSION['admin'] = $usuario;
+                                $_SESSION['admin'] = array();
+                                $_SESSION['admin']["usuario"] = $usuario;
+                                $_SESSION['admin']["nombre"] = $data['nombre'];
+                                $_SESSION['admin']["apellido"] = $data['apellido'];
+                                $_SESSION['admin']["id"] = $data['id'];
 
                                 if (isset($_GET["continue"])) {
                                     header("Location: " . $_GET["continue"]);

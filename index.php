@@ -5,7 +5,7 @@
 <!-- BEGIN: Head-->
 
 <head>
-    <?php $page_title = "Login"; include 'main/head.php';?>
+    <?php $page_title = "Login"; include 'auth/main/head.php';?>
 </head>
 <!-- END: Head-->
 
@@ -86,7 +86,7 @@
 
 
     <!--MAIN JS-->
-    <?php include 'main/mainjs.php';?>
+    <?php include 'auth/main/mainjs.php';?>
     <!--END MAIN JS-->
     
     <!--CONFIRMED EMAIL MESSAGE-->
