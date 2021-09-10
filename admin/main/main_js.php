@@ -35,13 +35,15 @@ function alertas($pStatus, $pTitulo, $pMsg)
     echo "<script>Swal.fire('$pTitulo', '$pMsg', '$pStatus');</script>";
 }
 
+$valor_evaluacion = (!empty($id_evaluacion)) ? "evaluacion=$id_evaluacion" : "" ;
+
 if (isset($_GET["status"]) && isset($_GET["titulo"]) && isset($_GET["msg"])) {
     $status = $_GET["status"];
     $titulo = $_GET["titulo"];
     $msg = $_GET["msg"];
     alertas($status, $titulo, $msg);
-    echo "<script>window.history.replaceState(null, null, '?login');</script>";
+    echo "<script>window.history.replaceState(null, null, '?$valor_evaluacion');</script>";
 }
 
-echo $dbAlert;
+// echo $dbAlert;
 ?>
