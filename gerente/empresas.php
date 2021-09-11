@@ -70,7 +70,7 @@ include 'main/head.php'; ?>
                                                                         Acciones
                                                                     </button>
                                                                     <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-                                                                        <a class='dropdown-item' href='empresas/acciones/editar_empresa.php?empresa={$empresas["id"]}'>Editar</a>
+                                                                        <a class='dropdown-item' href='editar_empresa.php?empresa={$empresas["id"]}'>Editar</a>
                                                                     </div>
                                                                 </div></td>
                                                             </tr>";
