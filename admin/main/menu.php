@@ -61,8 +61,8 @@ $current_page = PageName();
             <li class="nav-item" style="display: <?php echo $profiles; ?>;">
                 <a href="#"><i class="menu-livicon" data-icon="pie-chart"></i><span class="menu-title" data-i18n="pie-chart">Reportes</span></a>
                 <ul class="menu-content">
-                    <li class="<?php echo $current_page == '#.php' ? 'active' : NULL ?>">
-                        <a href="#.php"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Evaluaciones en progreso</span></a>
+                    <li class="<?php echo $current_page == 'reporte_1.php' ? 'active' : NULL ?>">
+                        <a href="reporte_1.php"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Gráficas</span></a>
                     </li>
                     <li class="<?php echo $current_page == '#.php' ? 'active' : NULL ?>">
                         <a href="#.php"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Reporte 2</span></a>
