@@ -138,12 +138,12 @@ include 'main/head.php'; ?>
                         <!-- Pie Chart -->
                         <?php
                         $script_pie = "";
-                        $evaluaciones_progreso_query = mysqli_query($link, "SELECT evaluacion.*, empresa.nombre AS empresa FROM evaluacion, empresa WHERE evaluacion.estado = 'En progreso' AND evaluacion.id_empresa = empresa.id");
+                        $evaluaciones_progreso_query = mysqli_query($link, "SELECT evaluacion.*, empresa.nombre AS empresa, ley.nombre AS ley FROM evaluacion, empresa, ley WHERE evaluacion.estado = 'En progreso' AND evaluacion.id_empresa = empresa.id AND evaluacion.id_ley = ley.id");
                         while ($evaluaciones_progreso = mysqli_fetch_assoc($evaluaciones_progreso_query)) {
                             echo "<div class='col-lg-6 col-md-12'>
                             <div class='card'>
                                 <div class='card-header'>
-                                    <h4 class='card-title'>{$evaluaciones_progreso["empresa"]}</h4>
+                                    <h4 class='card-title'><a href='evaluar_articulos.php?evaluacion={$evaluaciones_progreso["id"]}'>{$evaluaciones_progreso["empresa"]}<br>{$evaluaciones_progreso["ley"]}</a></h4>
                                 </div>
                                 <div class='card-content'>
                                     <div class='card-body'>
