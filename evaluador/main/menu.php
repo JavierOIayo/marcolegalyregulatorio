@@ -31,29 +31,6 @@ $current_page = PageName();
                 <a href="./"><i class="menu-livicon" data-icon="desktop"></i><span class="menu-title" data-i18n="desktop">Dashboard</span></a>
             </li>
 
-            <li class="<?php echo $current_page == 'usuarios.php' ? 'active' : NULL ?> nav-item">
-                <a href="usuarios.php"><i class="menu-livicon" data-icon="users"></i><span class="menu-title" data-i18n="users">Usuarios</span></a>
-            </li>
-
-            <li class="<?php echo $current_page == 'empresas.php' ? 'active' : NULL ?> nav-item">
-                <a href="empresas.php"><i class="menu-livicon" data-icon="building"></i><span class="menu-title" data-i18n="building">Empresas</span></a>
-            </li>
-
-            <li class="nav-item" style="display: <?php echo $profiles; ?>;">
-                <a href="#"><i class="menu-livicon" data-icon="balance"></i><span class="menu-title" data-i18n="balance">Leyes</span></a>
-                <ul class="menu-content">
-                    <li class="<?php echo $current_page == 'leyes.php' ? 'active' : NULL ?>">
-                        <a href="leyes.php"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Leyes</span></a>
-                    </li>
-                    <li class="<?php echo $current_page == '#.php' ? 'active' : NULL ?>">
-                        <a href="#.php"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Capítulos</span></a>
-                    </li>
-                    <li class="<?php echo $current_page == '#.php' ? 'active' : NULL ?>">
-                        <a href="#.php"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Artículos</span></a>
-                    </li>
-                </ul>
-            </li>
-
             <li class="<?php echo $current_page == 'evaluaciones.php' ? 'active' : NULL ?> nav-item">
                 <a href="evaluaciones.php"><i class="menu-livicon" data-icon="legal"></i><span class="menu-title" data-i18n="legal">Evaluaciones</span></a>
             </li>

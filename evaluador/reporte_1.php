@@ -1,5 +1,10 @@
 <?php
 include 'main/sesion.php';
+if (isset($_GET["empresa"])) {
+    $id_empresa = $_GET["empresa"];
+}else {
+    $id_empresa = 0;
+}
 ?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
@@ -30,19 +35,29 @@ include 'main/head.php'; ?>
             </div>
             <div class="content-body">
                 <!--MAIN CONTENT-->
-
+                <form method="POST" action="reportes/acciones/ver_graficas.php">
+                <label>Empresa</label>
+                    <select name="empresa" required class="form-group form-control">
+                        <option></option>
+                        <?php
+                        echo $id_empresa;
+                            $empresas_query = mysqli_query($link, "SELECT empresa.* FROM empresa, asignar_evaluador WHERE estado = 1 AND empresa.id = asignar_evaluador.id_empresa AND asignar_evaluador.id_usuario = $s_id");
+                            while ($empresas = mysqli_fetch_assoc($empresas_query)) {
+                                echo "<option value='{$empresas["id"]}'>{$empresas["nombre"]}</option>";
+                            }
+                        ?>
+                    </select>
+                    <input type="submit" value="Ver" class="btn btn-primary">
+                    <br><br>
+                </form>
                 <section id="apexchart">
                     <div class="row">
                         <!-- Pie Chart -->
                         <?php
                         $script_pie = "";
-                        $empresas_evaluar_query = mysqli_query($link, "SELECT id_empresa FROM asignar_evaluador WHERE id_usuario = $s_id");
-                        while ($empresas_evaluar = mysqli_fetch_assoc($empresas_evaluar_query)) {
-
-
-                            $evaluaciones_progreso_query = mysqli_query($link, "SELECT evaluacion.*, empresa.nombre AS empresa, ley.nombre AS ley FROM evaluacion, empresa, ley WHERE evaluacion.estado = 'En progreso' AND evaluacion.id_empresa = empresa.id AND evaluacion.id_ley = ley.id AND evaluacion.id_empresa = {$empresas_evaluar["id_empresa"]}");
-                            while ($evaluaciones_progreso = mysqli_fetch_assoc($evaluaciones_progreso_query)) {
-                                echo "<div class='col-lg-6 col-md-12'>
+                        $evaluaciones_progreso_query = mysqli_query($link, "SELECT evaluacion.*, empresa.nombre AS empresa, ley.nombre AS ley FROM evaluacion, empresa, ley WHERE evaluacion.estado = 'En progreso' AND evaluacion.id_empresa = empresa.id AND evaluacion.id_empresa = $id_empresa AND evaluacion.id_ley = ley.id");
+                        while ($evaluaciones_progreso = mysqli_fetch_assoc($evaluaciones_progreso_query)) {
+                            echo "<div class='col-lg-6 col-md-12'>
                             <div class='card'>
                                 <div class='card-header'>
                                     <h4 class='card-title'><a href='evaluar_articulos.php?evaluacion={$evaluaciones_progreso["id"]}'>{$evaluaciones_progreso["empresa"]}<br>{$evaluaciones_progreso["ley"]}</a></h4>
@@ -54,9 +69,9 @@ include 'main/head.php'; ?>
                                 </div>
                             </div>
                         </div>";
-                                $punteos_query = mysqli_query($link, "SELECT COUNT(punteo) AS punteo FROM evaluacion_articulos WHERE id_evaluacion = {$evaluaciones_progreso["id"]} GROUP BY punteo");
+                            $punteos_query = mysqli_query($link, "SELECT COUNT(punteo) AS punteo FROM evaluacion_articulos WHERE id_evaluacion = {$evaluaciones_progreso["id"]} GROUP BY punteo");
 
-                                $script_pie .= "var pieChartOptions = {
+                            $script_pie .= "var pieChartOptions = {
                             chart: {
                                 type: 'pie',
                                 height: 320
@@ -64,10 +79,10 @@ include 'main/head.php'; ?>
                             colors: themeColors,
                             labels: ['No cumple', 'Parcialmente', 'Cumple'],
                             series: [";
-                                while ($punteos = mysqli_fetch_assoc($punteos_query)) {
-                                    $script_pie .= $punteos["punteo"] . ",";
-                                }
-                                $script_pie .= "],
+                            while ($punteos = mysqli_fetch_assoc($punteos_query)) {
+                                $script_pie .= $punteos["punteo"] . ",";
+                            }
+                            $script_pie .= "],
                             legend: {
                                 itemMargin: {
                                     horizontal: 2
@@ -90,7 +105,6 @@ include 'main/head.php'; ?>
                             pieChartOptions
                         );
                         pieChart.render();";
-                            }
                         }
 
                         ?>
