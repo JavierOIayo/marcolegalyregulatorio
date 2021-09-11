@@ -72,6 +72,7 @@ include 'main/head.php'; ?>
                                                                         Acciones
                                                                     </button>
                                                                     <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+                                                                        <a class='dropdown-item' href='editar_empresa.php?empresa={$empresas["id"]}'>Editar empresa</a>
                                                                         <a data-id='{$empresas["id"]}' class='dropdown-item asignar_evaluador' data-toggle='modal' data-target='#formulario_asignar_evaluador'>Asignar evaluador</a>
                                                                         <a data-id='{$empresas["id"]}' class='dropdown-item asignar_gerente' data-toggle='modal' data-target='#formulario_asignar_gerente'>Asignar gerente</a>
                                                                         <a class='dropdown-item' href='empresas/acciones/desactivar_empresa.php?empresa={$empresas["id"]}'>Desactivar empresa</a>

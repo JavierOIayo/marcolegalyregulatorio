@@ -45,12 +45,12 @@ $current_page = PageName();
                     <li class="<?php echo $current_page == 'leyes.php' ? 'active' : NULL ?>">
                         <a href="leyes.php"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Leyes</span></a>
                     </li>
-                    <li class="<?php echo $current_page == '#.php' ? 'active' : NULL ?>">
+                    <!-- <li class="<?php echo $current_page == '#.php' ? 'active' : NULL ?>">
                         <a href="#.php"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Capítulos</span></a>
                     </li>
                     <li class="<?php echo $current_page == '#.php' ? 'active' : NULL ?>">
                         <a href="#.php"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Artículos</span></a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
 
