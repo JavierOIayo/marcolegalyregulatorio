@@ -1,9 +1,7 @@
 <?php
 include 'main/sesion.php';
 
-$empresas_query = mysqli_query($link, "SELECT * FROM empresa");
-$evaluadores_query = mysqli_query($link, "SELECT * FROM usuario WHERE rol = 'Evaluador' AND estado = 1");
-$gerentes_query = mysqli_query($link, "SELECT * FROM usuario WHERE rol = 'Gerente' AND estado = 1");
+$empresas_query = mysqli_query($link, "SELECT empresa.* FROM empresa, asignar_gerente WHERE asignar_gerente.id_empresa = empresa.id AND asignar_gerente.id_usuario = $s_id");
 ?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
@@ -39,9 +37,9 @@ include 'main/head.php'; ?>
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Empresas
-                                        <button type="button" class="btn btn-outline-primary block" data-toggle="modal" data-target="#formulario_crear_empresa">
+                                        <!-- <button type="button" class="btn btn-outline-primary block" data-toggle="modal" data-target="#formulario_crear_empresa">
                                             Crear una empresa
-                                        </button>
+                                        </button> -->
                                     </h4>
                                 </div>
                                 <div class="card-content">
@@ -72,11 +70,7 @@ include 'main/head.php'; ?>
                                                                         Acciones
                                                                     </button>
                                                                     <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-                                                                        <a data-id='{$empresas["id"]}' class='dropdown-item asignar_evaluador' data-toggle='modal' data-target='#formulario_asignar_evaluador'>Asignar evaluador</a>
-                                                                        <a data-id='{$empresas["id"]}' class='dropdown-item asignar_gerente' data-toggle='modal' data-target='#formulario_asignar_gerente'>Asignar gerente</a>
-                                                                        <a class='dropdown-item' href='empresas/acciones/desactivar_empresa.php?empresa={$empresas["id"]}'>Desactivar empresa</a>
-                                                                        <a class='dropdown-item' href='empresas/acciones/eliminar_empresa.php?empresa={$empresas["id"]}'>Eliminar empresa</a>
-                                                                        <a class='dropdown-item' href='empresas/acciones/activar_empresa.php?empresa={$empresas["id"]}'>Activar empresa</a>
+                                                                        <a class='dropdown-item' href='empresas/acciones/editar_empresa.php?empresa={$empresas["id"]}'>Editar</a>
                                                                     </div>
                                                                 </div></td>
                                                             </tr>";

@@ -82,7 +82,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 }
                             } else if ($data['estado'] == 1 && $data['rol'] == "Gerente") {
                                 session_start();
-                                $_SESSION['gerente'] = $usuario;
+                                $_SESSION['gerente'] = array();
+                                $_SESSION['gerente']["usuario"] = $usuario;
+                                $_SESSION['gerente']["nombre"] = $data['nombre'];
+                                $_SESSION['gerente']["apellido"] = $data['apellido'];
+                                $_SESSION['gerente']["id"] = $data['id'];
 
                                 if (isset($_GET["continue"])) {
                                     header("Location: " . $_GET["continue"]);
