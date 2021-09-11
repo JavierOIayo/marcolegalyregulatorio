@@ -62,7 +62,7 @@ $current_page = PageName();
                 <a href="#"><i class="menu-livicon" data-icon="pie-chart"></i><span class="menu-title" data-i18n="pie-chart">Reportes</span></a>
                 <ul class="menu-content">
                     <li class="<?php echo $current_page == '#.php' ? 'active' : NULL ?>">
-                        <a href="#.php"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Reporte 1</span></a>
+                        <a href="#.php"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Evaluaciones en progreso</span></a>
                     </li>
                     <li class="<?php echo $current_page == '#.php' ? 'active' : NULL ?>">
                         <a href="#.php"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Reporte 2</span></a>
