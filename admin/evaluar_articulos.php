@@ -39,7 +39,7 @@ include 'main/head.php'; ?>
                 <section id="basic-datatable">
                     <div class="row">
                         <div class="col-12">
-                            <form method="POST" action="evaluaciones/acciones/ingresar_evaluacion.php">
+                            <form method="POST" action="evaluaciones/acciones/ingresar_evaluacion.php" enctype='multipart/form-data'>
                             <input type="hidden" name="evaluacion_id" value="<?php echo $id_evaluacion;?>">
                                 <div class="card">
                                     <div class="card-header">
@@ -67,10 +67,10 @@ include 'main/head.php'; ?>
                                                         while ($evaluaciones = mysqli_fetch_assoc($evaluacion_query)) {
                                                             $num++;
                                                             
-                                                            if (!empty($evaluaciones["articulo"])) {
-                                                                $evidencia = "<input type='file' name='evidencia[]'>";
+                                                            if (empty($evaluaciones["evidencia"])) {
+                                                                $evidencia = "";
                                                             } else {
-                                                                $evidencia = "<a href='{$evaluaciones["evidencia"]}' target='_blank'>{$evaluaciones["evidencia"]}</a>";
+                                                                $evidencia = "<a class='btn btn-icon btn-warning mr-1 mb-1' href='evaluaciones/evidencias/evidencia_$id_evaluacion/{$evaluaciones["evidencia"]}' target='_blank'><i class='bx bx-file'></i></a>";
                                                             }
                                                             $noCumple_select = ($evaluaciones["punteo"] == 0) ? "selected" : NULL ;
                                                             $cumple_select = ($evaluaciones["punteo"] == 1) ? "selected" : NULL ;
@@ -85,9 +85,14 @@ include 'main/head.php'; ?>
                                                             }
                                                             
                                                             echo "<tr>
-                                                                <td>$num<input name='id_evaluacion[]' type='hidden' value='{$evaluaciones["id"]}'></td>
+                                                                <td>
+                                                                    $num
+                                                                    <input name='id_evaluacion[]' type='hidden' value='{$evaluaciones["id"]}'>
+                                                                    <input name='eval_id' type='hidden' value='$id_evaluacion'>
+                                                                    <input name='articulo_evaluado[]' type='hidden' value='{$evaluaciones["articulo"]}'>
+                                                                </td>
                                                                 <td><a href='#' data-id='{$evaluaciones["id_articulo"]}' class='ver_articulo'>{$evaluaciones["articulo"]}</a></td>
-                                                                <td>$evidencia</td>
+                                                                <td><input type='file' name='evidencia[]'>$evidencia</td>
                                                                 <td>$punteo</td>
                                                             </tr>";
                                                         }
