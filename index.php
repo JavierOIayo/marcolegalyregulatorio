@@ -62,7 +62,7 @@
                                                     <button type="submit" class="btn btn-primary glow w-100 position-relative">Ingresar<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
                                                 </form>
                                                 <hr>
-                                                <a class="btn btn-primary glow w-100 position-relative" href="members/">Olvidé mi contraseña <i id="icon-arrow" class="bx bx-right-arrow-alt"></i></a>
+                                                <!-- <a class="btn btn-primary glow w-100 position-relative" href="members/">Olvidé mi contraseña <i id="icon-arrow" class="bx bx-right-arrow-alt"></i></a> -->
                                             </div>
                                         </div>
                                     </div>

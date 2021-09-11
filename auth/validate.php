@@ -69,7 +69,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 }
                             } else if ($data['estado'] == 1 && $data['rol'] == "Evaluador") {
                                 session_start();
-                                $_SESSION['evaluador'] = $usuario;
+                                $_SESSION['evaluador'] = array();
+                                $_SESSION['evaluador']["usuario"] = $usuario;
+                                $_SESSION['evaluador']["nombre"] = $data['nombre'];
+                                $_SESSION['evaluador']["apellido"] = $data['apellido'];
+                                $_SESSION['evaluador']["id"] = $data['id'];
 
                                 if (isset($_GET["continue"])) {
                                     header("Location: " . $_GET["continue"]);
@@ -88,7 +92,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             } else if ($data['estado'] == 2) {
 
                                 header("location: reset_pass.php?usuario=$usuario");
-
                             } else if ($data['estado'] == 0) {
                                 $usuario_err = 'Usuario está inactivo';
                             }
