@@ -80,7 +80,7 @@ include 'main/head.php'; ?>
                                                                         Acciones
                                                                     </button>
                                                                     <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-                                                                        <a class='dropdown-item' href='evaluar_articulos.php?evaluacion={$evaluaciones["id"]}'>Evaluar Artículos</a>    
+                                                                        <a class='dropdown-item' href='evaluar_articulos.php?evaluacion={$evaluaciones["id"]}&estado={$evaluaciones["estado"]}'>Evaluar Artículos</a>    
                                                                         <a class='dropdown-item' href='evaluaciones/acciones/finalizar_evaluacion.php?evaluacion={$evaluaciones["id"]}'>Finalizar evaluación</a>
                                                                     </div>
                                                                 </div></td>

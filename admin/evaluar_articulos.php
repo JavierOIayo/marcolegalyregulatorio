@@ -7,6 +7,16 @@ if (isset($_GET["evaluacion"])) {
 
 $evaluacion_query = mysqli_query($link, "SELECT evaluacion_articulos.*, articulo.nombre AS articulo FROM evaluacion_articulos, articulo WHERE id_evaluacion = $id_evaluacion AND evaluacion_articulos.id_articulo = articulo.id");
 
+$eval_estado = "";
+if (isset($_GET["estado"])) {
+    $eval_estado = $_GET["estado"];
+}
+
+if ($eval_estado == "Finalizada") {
+    $fin_evaluacion = "disabled";
+} else {
+    $fin_evaluacion = "";
+}
 ?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
@@ -40,7 +50,7 @@ include 'main/head.php'; ?>
                     <div class="row">
                         <div class="col-12">
                             <form method="POST" action="evaluaciones/acciones/ingresar_evaluacion.php" enctype='multipart/form-data'>
-                            <input type="hidden" name="evaluacion_id" value="<?php echo $id_evaluacion;?>">
+                                <input type="hidden" name="evaluacion_id" value="<?php echo $id_evaluacion; ?>">
                                 <div class="card">
                                     <div class="card-header">
                                         <h4 class="card-title">Evaluar artículos
@@ -66,24 +76,24 @@ include 'main/head.php'; ?>
                                                         $num = 0;
                                                         while ($evaluaciones = mysqli_fetch_assoc($evaluacion_query)) {
                                                             $num++;
-                                                            
+
                                                             if (empty($evaluaciones["evidencia"])) {
                                                                 $evidencia = "";
                                                             } else {
                                                                 $evidencia = "<a class='btn btn-icon btn-warning mr-1 mb-1' href='evaluaciones/evidencias/evidencia_$id_evaluacion/{$evaluaciones["evidencia"]}' target='_blank'><i class='bx bx-file'></i></a>";
                                                             }
-                                                            $noCumple_select = ($evaluaciones["punteo"] == 0) ? "selected" : NULL ;
-                                                            $cumple_select = ($evaluaciones["punteo"] == 1) ? "selected" : NULL ;
-                                                            $cumpleParcialmente_select = ($evaluaciones["punteo"] == 0.5) ? "selected" : NULL ;
+                                                            $noCumple_select = ($evaluaciones["punteo"] == 0) ? "selected" : NULL;
+                                                            $cumple_select = ($evaluaciones["punteo"] == 1) ? "selected" : NULL;
+                                                            $cumpleParcialmente_select = ($evaluaciones["punteo"] == 0.5) ? "selected" : NULL;
                                                             if (!empty($evaluaciones["articulo"])) {
-                                                                $punteo = "<select name='punteo[]'>
+                                                                $punteo = "<select name='punteo[]' $fin_evaluacion>
                                                                         <option value='0' $noCumple_select>No cumple</option>
                                                                         <option value='1' $cumple_select>Cumple</option>
                                                                         <option value='0.5' $cumpleParcialmente_select>Cumple parcialmente</option>";
                                                             } else {
                                                                 $punteo = "<a href='{$evaluaciones["punteo"]}' target='_blank'>{$evaluaciones["punteo"]}</a>";
                                                             }
-                                                            
+
                                                             echo "<tr>
                                                                 <td>
                                                                     $num
@@ -92,7 +102,7 @@ include 'main/head.php'; ?>
                                                                     <input name='articulo_evaluado[]' type='hidden' value='{$evaluaciones["articulo"]}'>
                                                                 </td>
                                                                 <td><a href='#' data-id='{$evaluaciones["id_articulo"]}' class='ver_articulo'>{$evaluaciones["articulo"]}</a></td>
-                                                                <td><input type='file' name='evidencia[]'>$evidencia</td>
+                                                                <td><input type='file' name='evidencia[]' $fin_evaluacion>$evidencia</td>
                                                                 <td>$punteo</td>
                                                             </tr>";
                                                         }
